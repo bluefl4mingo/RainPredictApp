@@ -242,17 +242,8 @@ def load_artifacts():
     missing = [f for f in files if not os.path.exists(os.path.join(MODEL_DIR, f))]
     if missing:
         return None, None, None, None, missing
-    import tensorflow as tf
     from tensorflow.keras.models import load_model
-
-    def last_timestep(t):
-        return t[:, -1, :]
-
-    model = load_model(
-        os.path.join(MODEL_DIR, "tcn_rain_model.keras"),
-        custom_objects={"last_timestep": last_timestep},
-        safe_mode=False,
-    )
+    model =        load_model(os.path.join(MODEL_DIR, "tcn_rain_model.keras"),safe_mode=False)
     scaler       = joblib.load(os.path.join(MODEL_DIR, "scaler.pkl"))
     feature_cols = joblib.load(os.path.join(MODEL_DIR, "feature_cols.pkl"))
     history_df   = pd.read_csv(os.path.join(MODEL_DIR, "recent_history.csv"), index_col=0)
