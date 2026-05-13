@@ -249,7 +249,7 @@ def load_artifacts():
         return t[:, -1, :]
 
     model = load_model(
-        os.path.join(MODEL_DIR, "tcn_rain_model.h5"),
+        os.path.join(MODEL_DIR, "tcn_rain_model.keras"),
         custom_objects={"last_timestep": last_timestep},
         safe_mode=False,
     )
